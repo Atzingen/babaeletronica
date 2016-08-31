@@ -1,0 +1,36 @@
+sudo apt-get install libevent-dev
+sudo apt-get install python-all-dev
+sudo apt-get install xclip
+sudo apt-get install python-dev python3-dev
+sudo apt-get install git
+sudo apt-get install git-core
+sudo apt-get install ipython
+sudo apt-get install python-numpy
+sudo apt-get install idle
+sudo apt-get install ipython-notebook
+sudo apt-get install ninja-ide
+sudo apt-get install flask
+sudo apt-get install python-opencv
+sudo apt-get install python-serial
+sudo apt-get install python-wxgtk2.8
+sudo apt-get install python-pip
+sudo pip install picamera
+sudo pip install RPi.GPIO
+sudo easy_install greenlet
+sudo easy_install gevent
+_________________________________________________________________
+boot to shell
+systemctl set-default multi-user.target --force
+systemctl disable lightdm.service --force
+systemctl disable graphical.target --force
+systemctl disable plymouth.service --force
+Replace disable with enable to boot with GUI again
+_________________________________________________________________
+expandir sd card
+sudo fdisk /dev/mmcblk0
+Delete the second partition (d, 2), then re-create it using the defaults (n, p, 2, enter, enter), then write and exit (w). Reboot the system, then issue:
+sudo resize2fs /dev/mmcblk0p2
+_________________________________________________________________
+Raspistill: 
+Just modify the file /boot/firmware/config.txt is enough.
+Just add a line "start_x=1" at the bottom of the file config.txt, save it, and reboot the system

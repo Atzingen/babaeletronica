@@ -1,0 +1,502 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+  	<br>
+  	<p id="resposta" class="pull-right"></p>
+  	<br><br>
+
+	<div class="embed-responsive embed-responsive-4by3">
+		<h1 class="text-center">
+
+			<strong class="text-center"> Ajustes</strong>
+			<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#demo,#demo1,#demo2,#demo3,#demo4,#demo5,#demo6,#demo7">
+				<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp&nbsp info
+			</button>
+			<button id="Bteste" class="btn btn-default pull-right">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> atualiza dados
+			</button>
+		</h1>
+
+
+		<ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" href="#Raspberry"> Raspberry </a></li>
+		    <li><a data-toggle="tab" href="#Camera"> Camera </a></li>
+		    <li><a data-toggle="tab" href="#Som"> Som </a></li>
+		    <li><a data-toggle="tab" href="#Sensores"> Sensores </a></li>
+            <li><a data-toggle="tab" href="#usuarios"> Usuarios </a></li>
+		</ul>
+		<div class="tab-content">
+
+			<div id="Raspberry" class="tab-pane fade in active">
+				<h3 class="text-center">Raspberry</h3>
+				<p> Controles e configurações da camêra e dos LEDs Infravermelho </p>
+				<div class="panel-group">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Reiniciar </h3>
+								<button class="btn btn-default pull-right botao" data-id="reiniciar" role="button" aria-label="Left Align"
+									type="submit" name="Reiniciar" value="0">
+									<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>  Reiniciar
+								</button>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Reininia o Raspberry Pi, enviando o cmd "Sudo reboot" ao terminal.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Desligar </h3>
+								<button class="btn btn-default pull-right botao" data-id="desligar" role="button" aria-label="Left Align" type="submit" name="Desligar" value="0">
+									<span class="glyphicon glyphicon-off" aria-hidden="true"></span> Desligar
+								</button>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo1">
+							<div class="panel-body">
+								Desliga o Raspberry Pi, enviando o cmd "Sudo shutdown now" ao terminal.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Reiniciar Servidor </h3>
+								<button class="btn btn-default pull-right botao" data-id="restart-wsgi" role="button" aria-label="Left Align" type="submit" name="rst-wsgi" value="0">
+									<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> restart wsgi
+								</button>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Reinicia o servidor do flask-wsgi gevent.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Temperatura CPU </h3>
+							<h3 class="panel-title pull-right" id="temperatura-cpu">
+								<span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+								<div id="temperatura-cpu-val"></div>
+							</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Mosta temperatura no processador.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Memória RAM &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </h3>
+							<p id="texto-ram"> </p>
+							<div class="progress col-md-6 pull-right no-gutte">
+							  <div class="progress-bar progress-bar-success" role="progressbar" style="width:20%" id="ram_livre">
+							    Livre
+							  </div>
+							  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:80%" id="ram_usada">
+							    Usado
+							  </div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								<p>Mosta a quantidade de memória ram usada e disponível.</p>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Limpa Memória RAM </h3>
+								<button class="btn btn-default pull-right botao" data-id="limpa-ram" role="button" aria-label="Left Align" type="submit" name="limpa-ram" value="0">
+									<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Limpar RAM
+								</button>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Envia comando para livrar cash
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Sd Card  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </h3>
+							<p id="texto-sd"> </p>
+							<div class="progress col-md-6 pull-right no-gutte">
+							  <div class="progress-bar progress-bar-success" role="progressbar" style="width:70%" id="sd_livre">
+							    Livre
+							  </div>
+							  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:30%" id="sd_usado">
+							    Usado
+							  </div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Mosta a quantidade de memória usada e disponível no Sd Card.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<div class="col-xs-4 no-gutte">
+								<h3 class="panel-title pull-left"> Enviar Comando </h3>
+							</div>
+							<div class="col-xs-4 no-gutte">
+								<input type="text" class="form-control pull-right" id="usr">
+							</div>
+							<div class="col-xs-4 no-gutte">
+								<button class="btn btn-default pull-right botao" data-id="envia-comando" role="button" aria-label="Left Align" type="submit" name="envia-cmd" value="0">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Envia Comando
+								</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo">
+							<div class="panel-body">
+								Envia um comando customizado para o terminal.
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="Camera" class="tab-pane fade">
+				<h3 class="text-center"> Camera </h3>
+				<p> Controle das configurações e resolução da câmera.</p>
+				<p> RaspiCam noIR 5 Mpx.</p>
+				<div class="panel-group">
+
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Resolução da Câmera: Foto e Video </h3>
+							<div class="pull-right">
+								Video
+								<select class="selectpicker show-tick show-menu-arrow" data-id="resolucao_video" id="resolucao_video">
+										<option data-subtext="video"> 1920x1080 </option>
+										<option data-subtext="video"> 2592x1944 </option>
+										<option data-subtext="video"> 1296x972 </option>
+										<option data-subtext="video" selected> 1296x730 </option>
+										<option data-subtext="video"> 640x480 </option>
+								</select>
+								Foto
+								<select class="selectpicker show-tick show-menu-arrow" data-id="resolucao_foto" id="resolucao_foto">
+										<option data-subtext="foto"> 1920x1080 </option>
+										<option data-subtext="foto" selected> 2592x1944 </option>
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolha a resolução para as fotos com a RaspiCam ou para o stream de vídeo.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> LEDs Infravermelho </h3>
+							<div class="form-group pull-right">
+								<label class="radio-inline" data-id="leds1">
+									<input type="radio" name="optradio1" value="habilitado" checked="true" id='led_habilitado'> Habilitado
+								</label>
+								<label class="radio-inline" data-id="leds0">
+									<input type="radio" name="optradio1" value="desabilitado" id='led_desabilitado'> Desabilitado
+								</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Ativa ou desativa os LEDs infravermelhor, para visualização noturna. Mesmo que ativado,
+								os LEDs são ligados apenas quando há baixa luminosidade.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> FrameRate </h3>
+							<div class="form-group pull-right">
+								<select class="selectpicker show-tick show-menu-arrow" data-id="FrameRate" id="FrameRate">
+									{% for i in range(1,31) %}
+										{% if i == 15 %}
+											<option data-subtext="fps" selected> {{i}} </option>
+										{% else %}
+											<option data-subtext="fps"> {{i}} </option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolha o número de frames por segundo para o video stream.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Rotação </h3>
+							<div class="form-group pull-right">
+								<select class="selectpicker show-tick show-menu-arrow" data-id="Rotacao" id="rotacao">
+									<option data-subtext="rotação"> 0   </option>
+									<option data-subtext="rotação"> 90  </option>
+									<option data-subtext="rotação"> 180 </option>
+									<option data-subtext="rotação" selected> 270 </option>
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolha o número de frames por segundo para o video stream.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Flip Horizontal </h3>
+							<div class="form-group pull-right">
+								<label class="radio-inline" data-id="Hflip1">
+									<input type="radio" name="optradio2" checked="false" id=flipH_habilitado> Habilitado
+								</label>
+								<label class="radio-inline" data-id="Hflip0">
+									<input type="radio" name="optradio2" checked="true" id=flipH_desabilitado> Desabilitado
+								</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolhe se a imagem mostrada terá inversão horizontal (habilitado) ou não (desabilitado)
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Flip Vertical </h3>
+							<div class="form-group pull-right">
+								<label class="radio-inline" data-id="Vflip1">
+									<input type="radio" name="optradio3" checked="false" id=flipV_habilitado> Habilitado
+								</label>
+								<label class="radio-inline" data-id="Vflip0">
+									<input type="radio" name="optradio3" checked="true" id=flipV_desabilitado> Desabilitado
+								</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolhe se a imagem mostrada terá inversão vertical (habilitado) ou não (desabilitado)
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Tempo Preview </h3>
+							<div class="form-group pull-right">
+								<select class="selectpicker show-tick show-menu-arrow" data-id="tempo_preview" id="tempo_preview">
+									{% for i in range(1,31) %}
+										{% if i == 15 %}
+											<option data-subtext="segundos" selected> {{i/10}} </option>
+										{% else %}
+											<option data-subtext="segundos"> {{i/10}} </option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolha tempo que a câmera fica no modo preview quando acessada pela primeira vez. Este tempo permite o
+								aquecimento da câmera.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Tempo para Desligar </h3>
+							<div class="form-group pull-right">
+								<select class="selectpicker show-tick show-menu-arrow" data-id="tempo_desligar" id="tempo_desligar">
+									{% for i in range(2,17,2) %}
+										{% if i == 10 %}
+											<option data-subtext="segundos" selected> {{i}} </option>
+										{% else %}
+											<option data-subtext="segundos"> {{i}} </option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo2">
+							<div class="panel-body">
+								Escolha tempo que a câmera fica ligada após o browser parar de pedir/receber dados do stream. Passado este tempo,
+								a câmera é desligada
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+			<div id="Som" class="tab-pane fade">
+				<h3 class="text-center"> Som </h3>
+				<p> Controle do audio</p>
+				<p> Envia o audio do microfone (usb soundcard) utilizando o servidor de audio stream Icecast em darkice. Serviço disponível
+				em http://localhost:8000/raspi.m3u </p>
+				<div class="panel-group">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> Darkice
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
+							<p id="texto-darkice"></p>
+							<a class="btn btn-default pull-right botao" data-id="botao-darkice" role="button" aria-label="Left Align">
+								<span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span> Ligar/Reiniciar darkice</a>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo4">
+							<div class="panel-body">
+								Ligar ou desligar o Darkice, responsável pela captura de audio.
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">
+								Icecast
+								 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
+								<p id="texto-icecast"> </p>
+								<a class="btn btn-default pull-right botao" data-id="botao-icecast" role="button" aria-label="Left Align">
+								<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span> Ligar/Reiniciar Icecast</a>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo4">
+							<div class="panel-body">
+								Ligar ou desligar o Icecast, responsável pelo controle do stream de audio.
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="Sensores" class="tab-pane fade">
+				<h3 class="text-center">Sensores</h3>
+				<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+				<br>
+				<div class="panel-group">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> GPIO DHT22
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							</h3>
+							<p id="texto-temp-dth22"></p>
+							<div class="form-group pull-right">
+								<select class="selectpicker show-tick show-menu-arrow" data-id="dth22_gpio">
+									{% for i in range(1,31) %}
+										{% if i == 14 %}
+											<option data-subtext="GPIO" selected> {{i}} </option>
+										{% else %}
+											<option data-subtext="GPIO"> {{i}} </option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo6">
+							<div class="panel-body">
+								Escolha o GPIO de dados (one wire) que o sensor DHT22 está conectado
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left"> BMP108  </h3>
+							<h3 class="panel-title pull-right">
+								<p id="texto-bmp108"></p>
+							</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-collapse collapse" id="demo6">
+							<div class="panel-body">
+								Mosta o valor atual da pressão se se o sensor está ou não funcionando.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <div id="usuarios" class="tab-pane fade">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> E-mail </th>
+                                <th> Ultimo Acesso</th>
+                                <th> Acessos </th>
+                                <th> Deletar </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                {% if user[3] == 2 %}
+                                <tr class="active">
+                                {% else %}
+                                <tr class="danger">
+                                {% endif %}
+                                    <td> {{user[1]}} </td>
+                                    <td> {{user[4]}} </td>
+                                    <td> {{user[5]}} </td>
+                                    <td>
+                                        <form action="{{ url_for('ajustes') }}" method="post">
+                                            <input type ="submit" name ="submit" value ="{{user[0]}}" /><SPAN class="glyphicon glyphicon-trash"></SPAN>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br><br><br>
+
+<script>
+	$(document).ready(function() {
+		$(window).load(function() {
+	    	$('#Bteste').click();
+		});
+	});
+</script>
+
+{% endblock %}

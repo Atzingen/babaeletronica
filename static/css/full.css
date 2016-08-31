@@ -1,0 +1,132 @@
+body,html {
+  height: 100%;
+}
+
+body {
+  padding-top: 50px;
+  background: url("../img/bebe.jpg") repeat;
+  background-size:cover;
+}
+
+.no-gutte {
+    padding-right:0;
+    padding-left:0;
+}
+
+
+.wide {
+  width:100%;
+  height:100%;
+  height:calc(100% - 1px);
+  background-image:url("../img/bebe.jpg");
+  background-size:cover;
+}
+
+.wide img {
+  width:100%;
+}
+
+.navbar-default {
+  background-color: #f8d3e6;
+  border-color: #f1a7cd;
+}
+.navbar-default .navbar-brand {
+  color: black;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: black;
+}
+.navbar-default .navbar-text {
+  color: black;
+}
+.navbar-default .navbar-nav > li > a {
+  color: black;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: black;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: black;
+  background-color: #f1a7cd;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: black;
+  background-color: #f1a7cd;
+}
+.navbar-default .navbar-toggle {
+  border-color: #f1a7cd;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #f1a7cd;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: black;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: black;
+}
+.navbar-default .navbar-link {
+  color: black;
+}
+.navbar-default .navbar-link:hover {
+  color: black;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: black;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: black;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: black;
+    background-color: #f1a7cd;
+  }
+}
+
+.nav-tabs{
+  background-color:#f8d3e6;
+}
+
+.nav-tabs > li > a{
+  border: medium none;
+  color: black;
+}
+
+.nav-tabs > li > a:active{
+  color: black;
+}
+
+.nav-tabs > li > a:hover{
+    background-color: #f1a7cd !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color: #f1a7cd !important;
+}
+
+.panel-group .panel {
+    overflow:visible;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #f8d3e6;
+    /*color: black;
+}

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+
+		<title>Navbar with Search</title>
+
+		<!-- Bottstrap css e estilos customizados da pagina -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/static/css/styles.css" rel="stylesheet">
+		<link href="/static/css/full.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+		<!-- Jquery -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/static/js/jquery.min.js"><\/script>')</script><!--FallBack Squery-->
+
+		<!-- javascript e jquery do bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="/static/js/bootstrap.min.js"><\/script>')}</script>
+		<!-- FallBack-->
+
+	  	<script>
+    		$(document).ready(function() {
+			    var bodyColor = $('body').css('color');
+			    if(bodyColor != 'rgb(51, 51, 51)') {
+			    	$("head").prepend('<link rel="stylesheet" href="/static/css/bootstrap.min.css">');}});
+  		</script><!-- FallBack Bootstrap css-->
+
+		<!-- Highcharts -->
+		<script src="https://code.highcharts.com/stock/highstock.js"></script>
+		<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+		<!-- Bootstrap-select -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/css/bootstrap-select.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/i18n/defaults-*.min.js"></script>-->
+
+
+
+	</head>
+	<body>
+		<nav class="navbar-default navbar-fixed-top">
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+					<span class="sr-only"> Toogle </span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" rel="home" href={{ url_for('camera') }}>Camera</a>
+    			</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav" navbar-collapse>
+						<li><a href={{ url_for('audio') }}> Audio </a></li>
+						<li><a href="/"> Home </a></li>
+      			<li><a href={{ url_for('ambiente') }}> Ambiente </a></li>
+      			<li><a href={{ url_for('ajustes') }}> Ajustes </a></li>
+		    		</ul>
+		    		<ul class="nav navbar-nav navbar-right">
+		     			<li><a href={{ url_for('loggin') }}>
+		            	{% if 'logged_in' in session %}
+		            	Logout
+		            	{% else %}
+		            	Loggin
+		            	{% endif %}</a>
+		     			</li>
+		     			<li>  <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> </li>
+		    		</ul>
+				</div>
+  			</div>
+		</nav>
+
+		<div class="wide">
+			{% with messages = get_flashed_messages() %}
+		        {% if messages %}
+		         <br>
+		         <div class="container">
+		            <div class="page-header">
+		            {% for message in messages %}
+		            	<div class="alert alert-success" role="alert">
+  							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  							{{message}}
+						</div>
+		                <br>
+		            {% endfor %}
+		            </div>
+		         </div>
+		        {% endif %}
+		    {% endwith %}
+
+			<div class="container">
+		  		{% block content %}
+		  		{% endblock %}
+		  	</div>
+		</div>
+
+		<!--<script src="/static/js/graficos.js"></script>-->
+		<script type="text/javascript">
+			// Load the fonts
+			Highcharts.createElement('link', {
+			   href: '//fonts.googleapis.com/css?family=Signika:400,700',
+			   rel: 'stylesheet',
+			   type: 'text/css'
+			}, null, document.getElementsByTagName('head')[0]);
+
+			// Add the background image to the container
+			Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
+			   proceed.call(this);
+			   this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
+			});
+
+
+			Highcharts.theme = {
+			   colors: ["#808080", "#8085e9", "#8d4654", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+			      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+			   chart: {
+			      backgroundColor: null,
+			      style: {
+			         fontFamily: "Signika, serif"
+			      }
+			   },
+			   title: {
+			      style: {
+			         color: 'black',
+			         fontSize: '16px',
+			         fontWeight: 'bold'
+			      }
+			   },
+			   subtitle: {
+			      style: {
+			         color: 'black'
+			      }
+			   },
+			   tooltip: {
+			      borderWidth: 0
+			   },
+
+			   xAxis: {
+			      labels: {
+			         style: {
+			            color: '#6e6e70'
+			         }
+			      }
+			   },
+			   yAxis: {
+			      labels: {
+			         style: {
+			            color: '#6e6e70'
+			         }
+			      }
+			   },
+			   plotOptions: {
+			      series: {
+			         shadow: true
+			      },
+			      candlestick: {
+			         lineColor: '#404048'
+			      },
+			      map: {
+			         shadow: false
+			      }
+			   },
+
+			   // Highstock specific
+			   navigator: {
+			      xAxis: {
+			         gridLineColor: '#D0D0D8'
+			      }
+			   },
+			   rangeSelector: {
+			      buttonTheme: {
+			         fill: 'white',
+			         stroke: '#C0C0C8',
+			         'stroke-width': 1,
+			         states: {
+			            select: {
+			               fill: '#D0D0D8'
+			            }
+			         }
+			      }
+			   },
+			   scrollbar: {
+			      trackBorderColor: '#C0C0C8'
+			   },
+
+			   // General
+			   background2: '#E0E0E8'
+			};
+			// Apply the theme
+			Highcharts.setOptions(Highcharts.theme);
+		</script>
+
+		<script type="text/javascript">
+
+			$(function () {
+		        $('#container1').highcharts('StockChart', {
+		            chart: {
+		                type: 'area'
+		            },
+
+		            rangeSelector: {
+		                selected: 1
+		            },
+
+		            title: {
+		                text: 'Temperatura °C'
+		            },
+
+		            subtitle: {
+		            	text: 'Sensor BMP108'
+		            },
+
+		            yAxis: {
+		            	labels: {
+			                format: '{value} %',
+			            },
+		                reversed: false,
+		                showFirstLabel: false,
+		                showLastLabel: true
+		            },
+
+		            series: [{
+		                name: 'Temperatura °C',
+		                data: [
+								{% for dado in dados %}
+				                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[4]|safe}} ],
+				                {% endfor %}
+		            	],
+		                threshold: null,
+		                fillColor : {
+		                    linearGradient : {
+		                        x1: 0,
+		                        y1: 1,
+		                        x2: 0,
+		                        y2: 0
+		                    },
+		                    stops : [
+		                        [0, Highcharts.getOptions().colors[6]],
+		                        [1, Highcharts.Color(Highcharts.getOptions().colors[6]).setOpacity(0).get('rgba')]
+		                    ]
+		                },
+		                tooltip: {
+		                    valueDecimals: 2
+		                }
+		            }]
+		        });
+			});
+
+		</script>
+
+		<script type="text/javascript">
+			$(function () {
+		        $('#container2').highcharts('StockChart', {
+		            chart: {
+		                type: 'area'
+		            },
+
+		            rangeSelector: {
+		                selected: 1
+		            },
+
+		            title: {
+		                text: ' Pressão - Pa (pascal)'
+		            },
+
+		            subtitle: {
+		            	text: 'Sensor BMP108'
+		            },
+
+		            yAxis: {
+		            	labels: {
+			                format: '{value} Pa',
+			            },
+		                reversed: false,
+		                showFirstLabel: false,
+		                showLastLabel: true
+		            },
+
+		            series: [{
+		                name: 'Pressão Pa (Pascal)',
+		                data: [
+								{% for dado in dados %}
+				                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[3]|safe}} ],
+				                {% endfor %}
+		            	],
+		                threshold: null,
+		                fillColor : {
+		                    linearGradient : {
+		                        x1: 0,
+		                        y1: 1,
+		                        x2: 0,
+		                        y2: 0
+		                    },
+		                    stops : [
+		                        [0, Highcharts.getOptions().colors[4]],
+		                        [1, Highcharts.Color(Highcharts.getOptions().colors[4]).setOpacity(0).get('rgba')]
+		                    ]
+		                },
+		                tooltip: {
+		                    valueDecimals: 2
+		                }
+		            }]
+		        });
+			});
+
+		</script>
+
+		<script type="text/javascript">
+			$(function () {
+		        $('#container3').highcharts('StockChart', {
+		            chart: {
+		                type: 'area'
+		            },
+
+		            rangeSelector: {
+		                selected: 1
+		            },
+
+		            title: {
+		                text: ' Umidade (%)'
+		            },
+
+		            subtitle: {
+		            	text: 'Sensor DHT22'
+		            },
+
+		            yAxis: {
+		            	labels: {
+			                format: '{value} %',
+			            },
+		                reversed: false,
+		                showFirstLabel: false,
+		                showLastLabel: true
+		            },
+
+		            series: [{
+		                name: 'Pressão Pa (Pascal)',
+		                data: [
+								{% for dado in dados %}
+				                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[2]|safe}} ],
+				                {% endfor %}
+		            	],
+		                threshold: null,
+		                fillColor : {
+		                    linearGradient : {
+		                        x1: 0,
+		                        y1: 1,
+		                        x2: 0,
+		                        y2: 0
+		                    },
+		                    stops : [
+		                        [0, Highcharts.getOptions().colors[6]],
+		                        [1, Highcharts.Color(Highcharts.getOptions().colors[6]).setOpacity(0).get('rgba')]
+		                    ]
+		                },
+		                tooltip: {
+		                    valueDecimals: 2
+		                }
+		            }]
+		        });
+			});
+		</script>
+
+		<script type="text/javascript">
+			$(function () {
+		        $('#container4').highcharts('StockChart', {
+		            chart: {
+		                type: 'area'
+		            },
+
+		            rangeSelector: {
+		                selected: 1
+		            },
+
+		            title: {
+		                text: 'Temperarura °C'
+		            },
+
+		            subtitle: {
+		            	text: 'Sensor DHT22'
+		            },
+
+		            yAxis: {
+		            	labels: {
+			                format: '{value}°C',
+			            },
+		                reversed: false,
+		                showFirstLabel: false,
+		                showLastLabel: true
+		            },
+
+		            series: [{
+		                name: 'Temperarura °C',
+		                data: [
+								{% for dado in dados %}
+				                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[1]|safe}} ],
+				                {% endfor %}
+		            	],
+		                threshold: null,
+		                fillColor : {
+		                    linearGradient : {
+		                        x1: 0,
+		                        y1: 1,
+		                        x2: 0,
+		                        y2: 0
+		                    },
+		                    stops : [
+		                        [0, Highcharts.getOptions().colors[4]],
+		                        [1, Highcharts.Color(Highcharts.getOptions().colors[4]).setOpacity(0).get('rgba')]
+		                    ]
+		                },
+		                tooltip: {
+		                    valueDecimals: 2
+		                }
+		            }]
+		        });
+			});
+		</script>
+
+		<script type="text/javascript">
+			$(function () {
+		        $('#container0').highcharts('StockChart', {
+
+					title: {
+		                text: ' Temperarura, Pressão e Umidade'
+		            },
+
+		            subtitle: {
+		            	text: 'Sensores DHT22 e BMP108'
+		            },
+
+		        	legend: {
+			            enabled: true,
+			            align: 'center',
+			            //backgroundColor: '#FCFFC5',
+			            //borderColor: 'black',
+			            //borderWidth: 2,
+			            layout: 'vertical',
+			            verticalAlign: 'top',
+			            floating: true,
+			            y: 80,
+			            shadow: true
+			        },
+
+		            rangeSelector: {
+		                selected: 4
+		            },
+
+					yAxis: [{ // Primary yAxis
+			            labels: {
+			                format: '{value}°C',
+			                style: {
+			                    color: Highcharts.getOptions().colors[0]
+			                }
+			            },
+			            title: {
+			                text: 'Temperature',
+			                style: {
+			                    color: Highcharts.getOptions().colors[0]
+			                }
+			            },
+			            opposite: false
+			        },{ // Segundo Eixo
+			            title: {
+			                text: 'Umidade',
+			                style: {
+			                    color: Highcharts.getOptions().colors[1]
+			                }
+			            },
+			            labels: {
+			                format: '{value} %',
+			                style: {
+			                    color: Highcharts.getOptions().colors[1]
+			                }
+			            },
+			            opposite: true
+			        },
+			        { // Terceiro Eixo
+			            title: {
+			                text: 'Pressão',
+			                style: {
+			                    color: Highcharts.getOptions().colors[2]
+			                }
+			            },
+			            labels: {
+			                format: '{value} Pa',
+			                style: {
+			                    color: Highcharts.getOptions().colors[2]
+			                }
+			            },
+			            opposite: true
+			        }],
+
+		            tooltip: {
+		                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+		               valueDecimals: 2
+		            },
+
+		            series: [
+		            			{name: 'Temperatura',
+				                data: [
+										{% for dado in dados %}
+						                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), ({{dado[1]|safe}} + {{dado[4]|safe}})/2 ],
+						                {% endfor %}
+					            	]
+		            			},
+		            			{name: 'Umidade',
+		            			yAxis: 1,
+		            			data: [
+										{% for dado in dados %}
+						                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[2]|safe}} ],
+						                {% endfor %}
+					            	]
+
+								},
+		            			/*{name: 'Temperatura DHT22',
+		            			data: [
+										{% for dado in dados %}
+						                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[4]|safe}} ],
+						                {% endfor %}
+					            	]
+
+								},*/
+		            			{name: 'Pressão',
+		            			yAxis: 2,
+		            			data: [
+										{% for dado in dados %}
+						                	[ Date.UTC({{dado[0].year|safe}},{{dado[0].month|safe}},{{dado[0].day|safe}},{{dado[0].hour|safe}},{{dado[0].minute|safe}} ), {{dado[3]|safe}} ],
+						                {% endfor %}
+					            	]
+
+								}
+	            			]
+
+		        });
+		    });
+
+		</script>
+
+		<script src="/static/js/main.js"></script>
+
+		<script type="text/javascript">
+				window.setTimeout(function() {
+			    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+			        $(this).hide();
+			    });
+			}, 4000);
+		</script>
+
+
+
+	</body>
+
+</html>
